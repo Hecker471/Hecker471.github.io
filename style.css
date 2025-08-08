@@ -5,11 +5,24 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Segoe UI', sans-serif;
   line-height: 1.6;
   background: #f4f4f4;
   color: #333;
+  /* Smooth theme transitions */
+body,
+.navbar,
+.nav-links li a,
+.footer,
+.hero,
+.btn {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
 }
 
 /* NAVBAR */
@@ -20,6 +33,15 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
+  /* Smooth theme transitions */
+body,
+.navbar,
+.nav-links li a,
+.footer,
+.hero,
+.btn {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
 }
 
 .navbar .container {
@@ -32,6 +54,7 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
   color: #004e92;
+  text-decoration: none;
 }
 
 .nav-links {
@@ -60,7 +83,21 @@ body {
   background: linear-gradient(135deg, #000428, #004e92);
   color: white;
   text-align: center;
-  padding: 20px;
+  padding: 40px 20px;
+}
+
+/* HERO FADE-IN */
+.hero-content {
+  animation: fadeInUp 1s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-content h1 {
@@ -86,6 +123,15 @@ body {
 
 .hero-content .btn:hover {
   background: #00a2e8;
+}
+
+.btn {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.btn:hover {
+  background: #00a2e8;
+  transform: scale(1.05);
 }
 
 .name {
@@ -208,6 +254,59 @@ body {
   background: #004e92;
 }
 
+/* ===============================
+   TESTIMONIALS PAGE
+=============================== */
+.testimonials-section {
+  padding: 60px 20px;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+.testimonials-section h2 {
+  color: #004e92;
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.testimonial-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+}
+
+.testimonial-card img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.testimonial-card h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.testimonial-card p {
+  font-style: italic;
+  color: #555;
+}
+
+
 /* --------------------------- */
 /*     GENERAL STYLES         */
 /* --------------------------- */
@@ -291,7 +390,192 @@ button:hover {
   text-decoration: underline;
 }
 
-html {
-  scroll-behavior: smooth;
+/* ===============================
+   Footer Styles (Shared Section)
+   =============================== */
+.footer {
+  background-color: #1f1f1f;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  font-size: 14px;
 }
 
+/* ================================
+   Layout Fixes for Contact Page
+   ================================ */
+html, body {
+  height: 100%;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.contact-main {
+  flex: 1;
+}
+
+.nav-links li a.active {
+  color: #00a2e8;
+  font-weight: bold;
+  border-bottom: 2px solid #00a2e8;
+}
+
+/* ===============================
+   DARK MODE TOGGLE SWITCH
+=============================== */
+#dark-toggle {
+  display: none;
+}
+
+.toggle-label {
+  width: 50px;
+  height: 25px;
+  background: #ccc;
+  display: inline-block;
+  border-radius: 25px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-left: 15px;
+}
+
+.toggle-label::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2.5px;
+  left: 2.5px;
+  transition: transform 0.3s ease;
+}
+
+#dark-toggle:checked + .toggle-label {
+  background: #4d4d4d;
+}
+
+#dark-toggle:checked + .toggle-label::after {
+  transform: translateX(25px);
+}
+
+/* ===============================
+   DARK MODE STYLES
+=============================== */
+body.dark-mode {
+  background: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode .navbar {
+  background: #1f1f1f;
+}
+
+.dark-mode .nav-links li a {
+  color: #e0e0e0;
+}
+
+.dark-mode .nav-links li a:hover {
+  color: #00c6ff;
+}
+
+.dark-mode .hero {
+  background: linear-gradient(to right, #0f2027, #203a43);
+}
+
+.dark-mode .footer {
+  background: #1f1f1f;
+  color: #ccc;
+}
+
+.dark-mode .btn {
+  background: #00c6ff;
+  color: #000;
+}
+
+.dark-mode .btn:hover {
+  background: #00a2e8;
+}
+
+@media screen and (max-width: 768px) {
+  .hero {
+    padding: 40px 20px;
+    height: auto;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content h2 {
+    font-size: 1.2rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}
+/* ===============================
+   Sleek Logo Slider
+=============================== */
+.trusted-by {
+  background: #f0f4f8;
+  padding: 70px 20px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.trusted-by h2 {
+  font-size: 2rem;
+  color: #004e92;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+.logo-slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.logo-track {
+  display: flex;
+  width: calc(250px * 10); /* logo width * logo count */
+  animation: scroll 20s linear infinite;
+  gap: 50px;
+  align-items: center;
+}
+
+.logo-track img {
+  height: 50px;
+  object-fit: contain;
+  opacity: 0.8;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.logo-track img:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
